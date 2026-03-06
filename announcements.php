@@ -7,6 +7,18 @@ $msg=$_POST['message'];
 $conn->query("INSERT INTO announcements(message) VALUES('$msg')");
 }
 
+/* DELETE ANNOUNCEMENT */
+if(isset($_GET['delete'])){
+$id = $_GET['delete'];
+
+$stmt = $conn->prepare("DELETE FROM announcements WHERE id=?");
+$stmt->bind_param("i",$id);
+$stmt->execute();
+
+header("Location: announcements.php");
+exit();
+}
+
 $res=$conn->query("SELECT * FROM announcements ORDER BY id DESC");
 ?>
 
@@ -95,7 +107,6 @@ Post Announcement
 </div>
 
 
-<!-- Announcement List -->
 <div>
 
 <h2 class="text-xl font-semibold mb-4">
@@ -104,11 +115,11 @@ Latest Announcements
 
 <div class="space-y-4">
 
-<?php
-while($row=$res->fetch_assoc()){
-?>
+<?php while($row = $res->fetch_assoc()){ ?>
 
-<div class="bg-white shadow p-4 rounded-lg border-l-4 border-green-600">
+<div class="bg-white shadow p-4 rounded-lg border-l-4 border-green-600 flex justify-between items-start">
+
+<div>
 
 <p class="text-gray-800">
 <?php echo htmlspecialchars($row['message']); ?>
@@ -120,9 +131,15 @@ Posted on <?php echo $row['created_at'] ?? 'Recent'; ?>
 
 </div>
 
-<?php
-}
-?>
+<a href="announcements.php?delete=<?php echo $row['id']; ?>"
+onclick="return confirm('Are you sure you want to delete this announcement?');"
+class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm">
+Delete
+</a>
+
+</div>
+
+<?php } ?>
 
 </div>
 

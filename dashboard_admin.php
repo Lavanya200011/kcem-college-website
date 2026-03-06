@@ -1,6 +1,12 @@
+<?php
+include 'includes/db.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
+<title>Admin Dashboard</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -8,52 +14,53 @@
 
 <div class="flex">
 
-<div class="w-64 bg-white shadow h-screen">
+<!-- Sidebar -->
 
-<h2 class="p-4 font-bold">Admin Panel</h2>
+<div class="w-64 bg-gray-900 text-white min-h-screen">
 
-<ul class="p-4 space-y-2">
+<h2 class="p-6 text-xl font-bold">Admin Panel</h2>
 
-<li><a href="add_student.php">Add Student</a></li>
+<ul class="space-y-2 px-4">
 
-<li><a href="add_teacher.php">Add Teacher</a></li>
-
-<li><a href="create_class.php">Create Department</a></li>
-
-<li><a href="analytics_dashboard.php">Analytics</a></li>
+<li><a href="dashboard_admin.php">Dashboard</a></li>
+<li><a href="admin/manage_student.php">Students</a></li>
+<li><a href="admin/manage_teacher.php">Teachers</a></li>
+<li><a href="admin/manage_admin.php">Admins</a></li>
+<li><a href="logout.php">Logout</a></li>
 
 </ul>
 
 </div>
 
-<div class="p-6 flex-1">
+<!-- Content -->
 
-<h1 class="text-2xl font-bold">Admin Dashboard</h1>
+<div class="p-8 flex-1">
 
-<div class="grid grid-cols-4 gap-6 mt-6">
+<h1 class="text-3xl font-bold mb-6">Admin Dashboard</h1>
 
-<div class="bg-white p-6 rounded shadow">
+<div class="grid grid-cols-3 gap-6">
+
+<?php
+
+$students=$conn->query("SELECT COUNT(*) as total FROM students")->fetch_assoc();
+$teachers=$conn->query("SELECT COUNT(*) as total FROM teachers")->fetch_assoc();
+$admins=$conn->query("SELECT COUNT(*) as total FROM admins")->fetch_assoc();
+
+?>
+
+<div class="bg-white p-6 shadow rounded">
 Total Students
-<h2 class="text-3xl font-bold">480</h2>
+<h2 class="text-3xl"><?php echo $students['total']; ?></h2>
 </div>
 
-<div class="bg-white p-6 rounded shadow">
-Total Faculty
-<h2 class="text-3xl font-bold">24</h2>
+<div class="bg-white p-6 shadow rounded">
+Total Teachers
+<h2 class="text-3xl"><?php echo $teachers['total']; ?></h2>
 </div>
 
-<div class="bg-white p-6 rounded shadow">
-Departments
-<h2 class="text-3xl font-bold">4</h2>
-</div>
-
-<div class="bg-white p<h2>Admin Panel</h2>
-
-<a href="add_student.php">Add Student</a>
-<a href="add_teacher.php">Add Teacher</a>
-<a href="analytics_dashboard.php">Analytics</a>-6 rounded shadow">
-Attendance Today
-<h2 class="text-3xl font-bold">88%</h2>
+<div class="bg-white p-6 shadow rounded">
+Admins
+<h2 class="text-3xl"><?php echo $admins['total']; ?></h2>
 </div>
 
 </div>
