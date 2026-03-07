@@ -1,28 +1,28 @@
 <?php
 include '../includes/db.php';
 
-    $dept_query = $conn->query("SELECT * FROM departments ORDER BY dept_name ASC");
-
+// Fetch departments for the dropdown
+$dept_query = $conn->query("SELECT * FROM departments ORDER BY dept_name ASC");
 
 if(isset($_POST['add'])){
     // 1. Collect inputs from the form
-    $prn = $_POST['prn']; // This will be used as student_id
+    $prn = $_POST['prn']; 
     $name = $_POST['name'];
-    $email = $_POST['email'];
-    $department = $_POST['department']; // This is the dept_id from the dropdown
+    $roll_no = $_POST['roll_no'];
+    $department = $_POST['department']; 
+    $section_id = $_POST['section_id']; // Using the value from the form
     $semester = $_POST['semester'];
     $password = $_POST['password'];
 
-    // 2. The Cleaned Up Query
-    // Make sure 'section_id' has a value (I'll use 1 as a default or you can add it to the form)
-    $section_id = 1; 
+    // 2. The Balanced Query
+    // COLUMNS (7): student_id, password, name, roll_no, department, section_id, semester
+    // VALUES  (7): '$prn', '$password', '$name', '$roll_no', '$department', '$section_id', '$semester'
     
-    // Fixed: Matching 6 columns to 6 values
-    $sql = "INSERT INTO students (student_id, password, name, roll_no, section_id, semester) 
-            VALUES ('$prn', '$password', '$name', '$prn', '$section_id', '$semester')";
+    $sql = "INSERT INTO students (student_id, password, name, roll_no, department, section_id, semester) 
+            VALUES ('$prn', '$password', '$name', '$roll_no', '$department', '$section_id', '$semester')";
 
     if($conn->query($sql)) {
-        header("Location: manage_student.php");
+        header("Location: manage_student.php"); // Fixed filename to match your directory
         exit();
     } else {
         echo "Error: " . $conn->error;
@@ -66,8 +66,8 @@ if(isset($_POST['add'])){
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
-                    <input name="email" type="email" placeholder="john@kcem.edu" required
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Roll no</label>
+                    <input name="roll_no" type="text" placeholder="CSE-A-01" required
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
                 </div>
 
@@ -94,6 +94,12 @@ if(isset($_POST['add'])){
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
                     </div>
                 </div>
+
+                <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">srction_id</label>
+                        <input name="section_id" type="number" min="1" max="8" value="1"
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                    </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Initial Password</label>
