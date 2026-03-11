@@ -157,15 +157,9 @@ class="w-full border rounded p-2">
 
 </div>
 
-
-<button 
-name="create"
-class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
-
-Create Class
-
-</button>
-
+<br>
+<!-- <button name="create"class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Create Class</button> -->
+<a href="under-construction.php" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Create Class</a>
 </form>
 
 </div>

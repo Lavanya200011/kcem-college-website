@@ -1,7 +1,13 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include 'includes/db.php';
+
+$conn = new mysqli(
+    "sql212.infinityfree.com",
+    "if0_38879727",
+    "Lavanyath",
+    "if0_38879727_attendance_system"
+);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -93,25 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
   <style> /* small improvement for mobile */ body{min-height:100vh}</style>
-    
-    <script>
-  // Wait for the page to load
-  window.addEventListener('DOMContentLoaded', (event) => {
-    const alert = document.getElementById('success-alert');
-    if (alert) {
-      // Wait 3 seconds (3000 milliseconds)
-      setTimeout(() => {
-        // Start fading out
-        alert.style.opacity = '0';
-        
-        // Remove from the page completely after the fade animation
-        setTimeout(() => {
-          alert.style.display = 'none';
-        }, 500); 
-      }, 3000);
-    }
-  });
-</script>
   <script>
     function toggleMenu(){ const m=document.getElementById('mobile-menu'); if(m) m.classList.toggle('hidden'); }
 
@@ -178,14 +165,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?= e($error) ?>
       </div>
     <?php endif; ?>
-      
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-  <div id="success-alert" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded shadow-sm transition-opacity duration-500" role="alert">
-    <p class="font-bold">Success!</p>
-    <p>Attendance has been recorded successfully.</p>
-  </div>
-<?php endif; ?>
-      
 
     <?php if (!$show_students): ?>
       <!-- STEP 1: Filter form -->

@@ -1,4 +1,8 @@
 <?php
+    ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 include 'includes/db.php';
 
@@ -78,7 +82,7 @@ $announcements = $conn->query("SELECT * FROM announcements ORDER BY id DESC");
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center py-3">
                 <div class="hidden md:flex space-x-8 font-medium">
-                    <a href="#about" class="hover:text-indigo-300 transition">About</a>
+                    <a href="#aboutinfoshow" class="hover:text-indigo-300 transition">About</a>
                     <a href="#principal" class="hover:text-indigo-300 transition">Principal</a>
                     <a href="#courses" class="hover:text-indigo-300 transition">Courses</a>
                     <a href="#announcements" class="hover:text-indigo-300 transition">Notices</a>
@@ -115,26 +119,26 @@ $announcements = $conn->query("SELECT * FROM announcements ORDER BY id DESC");
             <img src="images/slide2.jpg" class="h-[400px] w-auto object-cover opacity-80">
         </div>
         <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 p-10 text-center">
-            <h2 class="text-4xl font-bold text-white">Shaping the Engineers of Tomorrow</h2>
+            <h2 id="aboutshowpage" class="text-4xl font-bold text-white">Shaping the Engineers of Tomorrow</h2>
         </div>
     </section>
 
-    <div class="max-w-6xl mx-auto -mt-12 relative z-10 px-4">
+    <div id="aboutinfoshow" class="max-w-6xl mx-auto -mt-12 relative z-10 px-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white p-8 shadow-xl rounded-2xl border border-slate-100">
             <div class="text-center">
-                <h3 class="text-3xl font-bold text-indigo-600">480+</h3>
+                <h3 class="text-3xl font-bold text-indigo-600">1000+</h3>
                 <p class="text-slate-500 text-sm font-medium">Students</p>
             </div>
             <div class="text-center border-l border-slate-100">
-                <h3 class="text-3xl font-bold text-green-600">40+</h3>
+                <h3 class="text-3xl font-bold text-green-600">25+</h3>
                 <p class="text-slate-500 text-sm font-medium">Faculty</p>
             </div>
             <div class="text-center border-l border-slate-100">
-                <h3 class="text-3xl font-bold text-purple-600">12</h3>
+                <h3 class="text-3xl font-bold text-purple-600">6</h3>
                 <p class="text-slate-500 text-sm font-medium">Departments</p>
             </div>
             <div class="text-center border-l border-slate-100">
-                <h3 class="text-3xl font-bold text-red-600">20+</h3>
+                <h3 class="text-3xl font-bold text-red-600">16+</h3>
                 <p class="text-slate-500 text-sm font-medium">Labs</p>
             </div>
         </div>
@@ -176,9 +180,9 @@ $announcements = $conn->query("SELECT * FROM announcements ORDER BY id DESC");
             "Computer Science (CSE)" => "dept-cse.php",
             "AI & Data Science (AIDS)" => "dept-aids.php",
             "Civil Engineering" => "dept-civil.php",
-            "Electrical Engineering" => "dept-electrical.php",
-            "MCA" => "dept-mca.php",
-            "MBA" => "dept-mba.php"
+            "Electrical Engineering" => "under-construction.php",
+            "MCA" => "under-construction.php",
+            "MBA" => "under-construction.php"
         ];
 
         foreach($depts as $name => $link): ?>
